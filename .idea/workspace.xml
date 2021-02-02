@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6e44fc16-18f7-4175-bcb0-f29794d81b98" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1khaPlXyd3eCr4B3BDhvz8uhj4J" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="RunManager" selected="Kotlin.BoolExpressionsKt">
+    <configuration name="BoolExpressionsKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="Leetcode_tests.main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="BoolExpressionsKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmoticonsParsingKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="Leetcode_tests.main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="EmoticonsParsingKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LongestPalindromicKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="Leetcode_tests.main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="LongestPalindromicKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MedianKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="Leetcode_tests.main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="MedianKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerSecurityKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="Leetcode_tests.main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="ServerSecurityKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Kotlin.BoolExpressionsKt" />
+        <item itemvalue="Kotlin.LongestPalindromicKt" />
+        <item itemvalue="Kotlin.ServerSecurityKt" />
+        <item itemvalue="Kotlin.MedianKt" />
+        <item itemvalue="Kotlin.EmoticonsParsingKt" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6e44fc16-18f7-4175-bcb0-f29794d81b98" name="Default Changelist" comment="" />
+      <created>1606155254278</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1606155254278</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="651" height="466" key="DebuggerActiveHint" timestamp="1607548180416">
+      <screen x="0" y="0" width="2048" height="1280" />
+    </state>
+    <state width="651" height="466" key="DebuggerActiveHint/0.0.2048.1280@0.0.2048.1280" timestamp="1607548180416" />
+    <state width="2006" height="454" key="GridCell.Tab.0.bottom" timestamp="1607599537962">
+      <screen x="0" y="0" width="2048" height="1280" />
+    </state>
+    <state width="2006" height="454" key="GridCell.Tab.0.bottom/0.0.2048.1280/-410.-1440.2560.1440@0.0.2048.1280" timestamp="1607599537962" />
+    <state width="2006" height="335" key="GridCell.Tab.0.bottom/0.0.2048.1280@0.0.2048.1280" timestamp="1607550392525" />
+    <state width="2047" height="421" key="GridCell.Tab.0.bottom/71.23.1977.1257/-410.-1417.2560.1417@-410.-1417.2560.1417" timestamp="1606744524836" />
+    <state width="2006" height="454" key="GridCell.Tab.0.center" timestamp="1607599537961">
+      <screen x="0" y="0" width="2048" height="1280" />
+    </state>
+    <state width="2006" height="454" key="GridCell.Tab.0.center/0.0.2048.1280/-410.-1440.2560.1440@0.0.2048.1280" timestamp="1607599537961" />
+    <state width="2006" height="335" key="GridCell.Tab.0.center/0.0.2048.1280@0.0.2048.1280" timestamp="1607550392523" />
+    <state width="2047" height="421" key="GridCell.Tab.0.center/71.23.1977.1257/-410.-1417.2560.1417@-410.-1417.2560.1417" timestamp="1606744524836" />
+    <state width="2006" height="454" key="GridCell.Tab.0.left" timestamp="1607599537960">
+      <screen x="0" y="0" width="2048" height="1280" />
+    </state>
+    <state width="2006" height="454" key="GridCell.Tab.0.left/0.0.2048.1280/-410.-1440.2560.1440@0.0.2048.1280" timestamp="1607599537960" />
+    <state width="2006" height="335" key="GridCell.Tab.0.left/0.0.2048.1280@0.0.2048.1280" timestamp="1607550392523" />
+    <state width="2047" height="421" key="GridCell.Tab.0.left/71.23.1977.1257/-410.-1417.2560.1417@-410.-1417.2560.1417" timestamp="1606744524836" />
+    <state width="2006" height="454" key="GridCell.Tab.0.right" timestamp="1607599537962">
+      <screen x="0" y="0" width="2048" height="1280" />
+    </state>
+    <state width="2006" height="454" key="GridCell.Tab.0.right/0.0.2048.1280/-410.-1440.2560.1440@0.0.2048.1280" timestamp="1607599537962" />
+    <state width="2006" height="335" key="GridCell.Tab.0.right/0.0.2048.1280@0.0.2048.1280" timestamp="1607550392524" />
+    <state width="2047" height="421" key="GridCell.Tab.0.right/71.23.1977.1257/-410.-1417.2560.1417@-410.-1417.2560.1417" timestamp="1606744524836" />
+    <state width="2006" height="454" key="GridCell.Tab.1.bottom" timestamp="1607599537964">
+      <screen x="0" y="0" width="2048" height="1280" />
+    </state>
+    <state width="2006" height="454" key="GridCell.Tab.1.bottom/0.0.2048.1280/-410.-1440.2560.1440@0.0.2048.1280" timestamp="1607599537964" />
+    <state width="2006" height="454" key="GridCell.Tab.1.bottom/0.0.2048.1280@0.0.2048.1280" timestamp="1607548217913" />
+    <state width="2047" height="421" key="GridCell.Tab.1.bottom/71.23.1977.1257/-410.-1417.2560.1417@-410.-1417.2560.1417" timestamp="1606744524837" />
+    <state width="2006" height="454" key="GridCell.Tab.1.center" timestamp="1607599537963">
+      <screen x="0" y="0" width="2048" height="1280" />
+    </state>
+    <state width="2006" height="454" key="GridCell.Tab.1.center/0.0.2048.1280/-410.-1440.2560.1440@0.0.2048.1280" timestamp="1607599537963" />
+    <state width="2006" height="454" key="GridCell.Tab.1.center/0.0.2048.1280@0.0.2048.1280" timestamp="1607548217912" />
+    <state width="2047" height="421" key="GridCell.Tab.1.center/71.23.1977.1257/-410.-1417.2560.1417@-410.-1417.2560.1417" timestamp="1606744524837" />
+    <state width="2006" height="454" key="GridCell.Tab.1.left" timestamp="1607599537963">
+      <screen x="0" y="0" width="2048" height="1280" />
+    </state>
+    <state width="2006" height="454" key="GridCell.Tab.1.left/0.0.2048.1280/-410.-1440.2560.1440@0.0.2048.1280" timestamp="1607599537963" />
+    <state width="2006" height="454" key="GridCell.Tab.1.left/0.0.2048.1280@0.0.2048.1280" timestamp="1607548217911" />
+    <state width="2047" height="421" key="GridCell.Tab.1.left/71.23.1977.1257/-410.-1417.2560.1417@-410.-1417.2560.1417" timestamp="1606744524837" />
+    <state width="2006" height="454" key="GridCell.Tab.1.right" timestamp="1607599537964">
+      <screen x="0" y="0" width="2048" height="1280" />
+    </state>
+    <state width="2006" height="454" key="GridCell.Tab.1.right/0.0.2048.1280/-410.-1440.2560.1440@0.0.2048.1280" timestamp="1607599537964" />
+    <state width="2006" height="454" key="GridCell.Tab.1.right/0.0.2048.1280@0.0.2048.1280" timestamp="1607548217912" />
+    <state width="2047" height="421" key="GridCell.Tab.1.right/71.23.1977.1257/-410.-1417.2560.1417@-410.-1417.2560.1417" timestamp="1606744524837" />
+    <state x="957" y="-1101" width="670" height="676" key="search.everywhere.popup" timestamp="1606656306165">
+      <screen x="-410" y="-1417" width="2560" height="1417" />
+    </state>
+    <state x="957" y="-1101" width="670" height="676" key="search.everywhere.popup/71.23.1977.1257/-410.-1417.2560.1417@-410.-1417.2560.1417" timestamp="1606656306165" />
+  </component>
+</project>
