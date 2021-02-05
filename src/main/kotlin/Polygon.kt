@@ -1,5 +1,3 @@
-import java.lang.IllegalArgumentException
-
 fun main() {
     val testData = """
         36 30 36 30

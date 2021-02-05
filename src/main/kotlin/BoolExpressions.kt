@@ -1,6 +1,3 @@
-import java.lang.IllegalArgumentException
-import kotlin.math.exp
-
 fun main() {
     test(
         testData = listOf(

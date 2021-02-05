@@ -1,4 +1,3 @@
-import java.lang.IllegalArgumentException
 import kotlin.math.abs
 
 fun main() {
