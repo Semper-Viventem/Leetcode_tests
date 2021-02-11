@@ -37,7 +37,7 @@ private fun process(data: IntArray): Int {
     var totalMax = 0
 
     // O(n log(n))
-    data.sort()
+    data.sortDescending()
 
     for (i in (0 until data.lastIndex)) {
 
