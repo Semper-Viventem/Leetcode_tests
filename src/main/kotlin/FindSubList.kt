@@ -1,5 +1,5 @@
 /**
- * There is array of random ints. You have find sublist with numbers where each number less or equals
+ * There is array of random ints. You have to find sublist with numbers where each number less or equals
  * of another two any numbers in this sublist. And return sum of this sublist.
  *
  * Example:
