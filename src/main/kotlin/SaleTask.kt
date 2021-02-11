@@ -26,6 +26,9 @@ fun main() {
  * Size complexity: O(1)
  */
 fun process(data: IntArray): Int {
+    if (data.isEmpty()) return 0
+    if (data.size == 1) return data.first()
+
     var result = 0
     var currentMaxValue = data.last()
 
