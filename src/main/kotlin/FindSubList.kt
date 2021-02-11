@@ -1,6 +1,6 @@
 /**
  * There is array of random ints. You have to find sublist with numbers where each number less or equals
- * of another two any numbers in this sublist. And return sum of this sublist.
+ * of sum of another two any numbers in this sublist. And return sum of this sublist.
  *
  * Example:
  * 1, 7, 3, 15, 2, 5, 2, 1, 4 -> 22 (7, 15)
