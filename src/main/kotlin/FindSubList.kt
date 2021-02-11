@@ -39,7 +39,7 @@ private fun process(data: IntArray): Int {
     // O(n log(n))
     data.sort()
 
-    for (i in 0 until data.lastIndex) {
+    for (i in (0 until data.lastIndex)) {
 
         val minItem1 = data[i]
         val minItem2 = data[i + 1]
