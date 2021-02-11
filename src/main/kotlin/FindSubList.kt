@@ -26,11 +26,17 @@ fun main() {
     )
 }
 
+/**
+ * I found solution only with pre-processed sorted data but it need to n log(n) complexity for sorting
+ * Runtime complexity: O(n log(n) + n^2)
+ * Memory complexity: O(1)
+ */
 private fun process(data: IntArray): Int {
     if (data.size < 3) return data.sum()
 
     var totalMax = 0
 
+    // O(n log(n))
     data.sort()
 
     for (i in 0 until data.lastIndex) {
