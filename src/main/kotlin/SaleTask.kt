@@ -25,7 +25,7 @@ fun main() {
  * Runtime complexity: O(n)
  * Size complexity: O(1)
  */
-fun process(data: IntArray): Int {
+private fun process(data: IntArray): Int {
     if (data.isEmpty()) return 0
     if (data.size == 1) return data.first()
 
