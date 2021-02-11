@@ -28,7 +28,7 @@ fun main() {
 
 /**
  * I found solution only with pre-processed sorted data but it need to n log(n) complexity for sorting
- * Runtime complexity: O(n log(n) + n^2)
+ * Runtime complexity: O(n^2)
  * Memory complexity: O(1)
  */
 private fun process(data: IntArray): Int {
