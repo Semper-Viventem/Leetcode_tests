@@ -6,7 +6,7 @@ fun <A, B> test(testData: List<Pair<A, B>>, testFunctionExecution: (input: A) ->
             println(test)
         }
         val result = testFunctionExecution.invoke(test)
-        println(if (expected == result) "OK" else "FUCK ($result)")
+        println(if (expected == result) "OK" else "FUCK (output: $result expected: $expected)")
         println()
     }
 }
