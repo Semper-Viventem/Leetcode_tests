@@ -21,6 +21,10 @@ fun main() {
     )
 }
 
+/**
+ * Runtime complexity: O(n)
+ * Size complexity: O(1)
+ */
 fun process(data: IntArray): Int {
     var result = 0
     var currentMaxValue = data.last()
