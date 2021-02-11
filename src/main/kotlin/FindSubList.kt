@@ -1,3 +1,14 @@
+/**
+ * There is array of random ints. You have find sublist with numbers where each number less or equals
+ * of another two any numbers in this sublist. And return sum of this sublist.
+ *
+ * Example:
+ * 1, 7, 3, 15, 2, 5, 2, 1, 4 -> 22 (7, 15)
+ * 3, 3, 3, 1, 3, 7, 1 -> 13 (3, 3, 3, 1, 3)
+ *
+ * Good sublist: [1, 2, 1]: 1 + 1 !< 2
+ * Bad sublist: [1, 7, 15]: 1 + 7 < 15
+ */
 fun main() {
     test(
         testData = listOf(
