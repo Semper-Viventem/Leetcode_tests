@@ -59,15 +59,15 @@ private fun foo(str: String): Boolean {
     for (c in str) {
         if (selfClosers[c] != null) {
             if (selfClosers[c] == 0) {
-                selfClosers.computeIfPresent(c) { _, v -> v +  1}
+                selfClosers.computeIfPresent(c) { _, v -> v + 1 }
                 openers.add(c)
             } else {
                 val lastOpener = openers.last()
                 if (lastOpener == c) {
-                    selfClosers.computeIfPresent(c) { _, v -> v -  1}
+                    selfClosers.computeIfPresent(c) { _, v -> v - 1 }
                     openers.removeLast()
                 } else {
-                    selfClosers.computeIfPresent(c) { _, v -> v +  1}
+                    selfClosers.computeIfPresent(c) { _, v -> v + 1 }
                     openers.add(c)
                 }
             }
@@ -88,5 +88,5 @@ private fun foo(str: String): Boolean {
 
     }
 
-    return openers.isEmpty() && selfClosers.values.sumBy { it } == 0
+    return openers.isEmpty()
 }
