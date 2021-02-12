@@ -39,7 +39,7 @@ fun main() {
 }
 
 /**
- * Runtime complexity:  O(n)
+ * Runtime complexity: O(n)
  * Memory complexity: O(1)
  */
 private fun foo(str: String): Boolean {
