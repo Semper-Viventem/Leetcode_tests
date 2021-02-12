@@ -36,6 +36,10 @@ fun main() {
     )
 }
 
+/**
+ * Runtime complexity:  O(n)
+ * Memory complexity: O(1)
+ */
 private fun foo(str: String): Boolean {
 
     val openers = LinkedList<Char>()
