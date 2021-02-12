@@ -55,7 +55,7 @@ private fun foo(str: String): Boolean {
     val selfClosers = mutableMapOf(
         '|' to 0,
         '\'' to 0,
-        '"' to 0
+        '\"' to 0
     )
 
     for (c in str) {
