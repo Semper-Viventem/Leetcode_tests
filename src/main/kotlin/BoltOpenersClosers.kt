@@ -9,8 +9,6 @@ import java.util.*
  * "{ [ ] ( ) }" -> true
  * "{ [ ( ] ) }" -> false
  *
- * To execute Kotlin code, please define a top level function named main
- *
  * ""  // ok
  * "{" // ok
  * "}" // ok
