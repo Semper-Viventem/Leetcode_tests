@@ -75,17 +75,16 @@ private fun foo(str: String): Boolean {
             if (map.values.contains(c)) {
                 openers.add(c)
             }
+
             val expectedOpener = map[c]
             val lastOpener = openers.lastOrNull()
+
             if (expectedOpener != null && lastOpener == expectedOpener) {
                 openers.removeLast()
             } else if (expectedOpener != null) {
                 return false
             }
-
         }
-
-
     }
 
     return openers.isEmpty()
