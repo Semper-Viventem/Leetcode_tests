@@ -30,7 +30,9 @@ fun main() {
             "{ [ ] ( ) }" to true,
             "{ [ ( ] ) }" to false,
             "| ( | | ) |" to true,
-            "| ( |  ) |" to false
+            "| ( |  ) |" to false,
+            "| | ( { } [ ' ' ] ( ) ) | |" to true,
+            "| | ( { } [ ' ' ] ( [ ) ) | |" to false,
         ),
         testFunctionExecution = ::foo
     )
@@ -59,15 +61,15 @@ private fun foo(str: String): Boolean {
     for (c in str) {
         if (selfClosers[c] != null) {
             if (selfClosers[c] == 0) {
-                selfClosers[c] = selfClosers[c]!! + 1
+                selfClosers.computeIfPresent(c) { _, v -> v +  1}
                 openers.add(c)
             } else {
                 val lastOpener = openers.last()
                 if (lastOpener == c) {
-                    selfClosers[c] = selfClosers[c]!! - 1
+                    selfClosers.computeIfPresent(c) { _, v -> v -  1}
                     openers.removeLast()
                 } else {
-                    selfClosers[c] = selfClosers[c]!! + 1
+                    selfClosers.computeIfPresent(c) { _, v -> v +  1}
                     openers.add(c)
                 }
             }
