@@ -42,7 +42,7 @@ class Solution {
         var result = 0
 
         while (current < s.length && s[current] in '0'..'9') {
-            val digit = s[current++] - '0'
+            val digit = s[current++].digitToInt()
             if(result > threshold) return if(sign < 0) Int.MIN_VALUE else Int.MAX_VALUE
             if(result == threshold) {
                 if(sign < 0 && digit >= 8) return Int.MIN_VALUE
