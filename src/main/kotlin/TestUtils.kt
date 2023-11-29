@@ -1,6 +1,17 @@
-fun <A, B> test(testData: List<Pair<A, B>>, testFunctionExecution: (input: A) -> B) {
+fun <A, B> test(
+    testData: List<Pair<A, B>>,
+    testFunctionExecution: (input: A) -> B,
+    runOnlyCaseNr: Int? = null
+) {
     var isAllPassed = true
-    testData.forEach { (test, expected) ->
+
+    val selectedTests = if (runOnlyCaseNr != null) {
+        listOf(testData[runOnlyCaseNr])
+    } else {
+        testData
+    }
+
+    selectedTests.forEach { (test, expected) ->
         if (test is IntArray) {
             println(test.toList())
         } else {
