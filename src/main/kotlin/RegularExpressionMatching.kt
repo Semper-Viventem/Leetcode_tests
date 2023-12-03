@@ -37,8 +37,6 @@ fun main() {
             ("a" to "") to false,
             ("" to ".") to false,
             ("ab" to "a*b") to true,
-            ("ab" to ".*.") to true,
-            ("ab" to ".*..") to true,
             ("abcd" to "a*d") to false,
             ("abcd" to "a..d") to true,
             ("abcd" to "a.d") to false,
@@ -50,13 +48,60 @@ fun main() {
             ("mississippi" to "mis*is*ip*.") to true,
             ("aaa" to "ab*a") to false,
             ("bbbba" to ".*a*a") to true,
+            ("ab" to ".*..") to true,
+            ("abcdede" to "ab.*de") to true
         ),
         testFunctionExecution = { (s, p) -> isMatch(s, p) },
-        runOnlyCaseNr = 7,
+        //runOnlyCaseNr = 7,
     )
 }
 
 fun isMatch(s: String, p: String): Boolean {
+    val dp = Array(s.length + 1) { BooleanArray(p.length + 1) }
+    dp[0][0] = true
+    for (i in 1..p.length) {
+        dp[0][i] = if (p[i - 1] == '*') dp[0][i - 2] else false
+    }
+
+    for (i in 1..s.length) {
+        for (j in 1..p.length) {
+            if (p[j - 1] == s[i - 1] || p[j - 1] == '.') {
+                dp[i][j] = dp[i - 1][j - 1]
+            } else if (p[j - 1] == '*') {
+                dp[i][j] = dp[i][j - 2] ||
+                        dp[i - 1][j] && (s[i - 1] == p[j - 2] || p[j - 2] == '.')
+            }
+        }
+    }
+    return dp[s.length][p.length]
+}
+
+fun isMatch3(s: String, p: String): Boolean {
+    if (p.isEmpty()) return s.isEmpty()
+
+    if (p.length >= 2 && p[1] == '*' && s.length > 0 && (s[0] == p[0] || p[0] == '.')) {
+        return isMatch(s.substring(1), p) || isMatch(s, p.substring(2))
+    } else if (p.length >= 2 && p[1] == '*') {
+        return isMatch(s, p.substring(2))
+    }
+
+    return if (s.length > 0) {
+        if (s[0] == p[0] || p[0] == '.') {
+            isMatch(s.substring(1), p.substring(1))
+        } else {
+            false
+        }
+    } else {
+        false
+    }
+}
+
+fun isMatch2(s: String, p: String): Boolean {
+    return p.toRegex().matches(s)
+}
+
+// -------------------------
+fun isMatch1(s: String, p: String): Boolean {
     if (p.isEmpty()) return s.isEmpty()
     if (s.isEmpty()) return p == "*"
 
@@ -70,7 +115,19 @@ fun isMatch(s: String, p: String): Boolean {
         println(newMask)
 
         val currentPlural = maskMode as? MaskMode.PluralOptional
-        val shouldSkip = (newMask is MaskMode.PluralOptional && (!newMask.check(s.getOrNull(i + 1)) && !newMask.check(s.getOrNull(i))))
+//        val shouldSkip = (newMask is MaskMode.PluralOptional && (!newMask.check(s.getOrNull(i + 1)) && !newMask.check(s.getOrNull(i))))
+//                || currentPlural != null && newMask !is MaskMode.SingleOptional && newMask.check(currentPlural.symbol)
+
+        val nextMask = newMask.takeIf { it is MaskMode.PluralOptional && it.symbol == '.' }?.let {
+            getMaskMode(p, maskIndex + 2)
+        }
+
+        val shouldSkip = nextMask != null && nextMask.check(s.getOrNull(i + 1))
+                || (newMask is MaskMode.PluralOptional && (!newMask.check(s.getOrNull(i + 1)) && !newMask.check(
+            s.getOrNull(
+                i
+            )
+        )))
                 || currentPlural != null && newMask !is MaskMode.SingleOptional && newMask.check(currentPlural.symbol)
 
         if (newMask is MaskMode.PluralOptional) {
