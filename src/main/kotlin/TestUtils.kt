@@ -3,7 +3,7 @@ fun <A, B> test(
     testFunctionExecution: (input: A) -> B,
     runOnlyCaseNr: Int? = null
 ) {
-    var isAllPassed = true
+    var failedCount: Int = 0
 
     val selectedTests = if (runOnlyCaseNr != null) {
         listOf(testData[runOnlyCaseNr])
@@ -11,7 +11,7 @@ fun <A, B> test(
         testData
     }
 
-    selectedTests.forEach { (test, expected) ->
+    selectedTests.forEachIndexed { index, (test, expected) ->
         if (test is IntArray) {
             println(test.toList())
         } else {
@@ -20,12 +20,13 @@ fun <A, B> test(
         val result = testFunctionExecution.invoke(test)
         val isPassed = expected == result
         if (!isPassed) {
-            isAllPassed = false
+            failedCount++
         }
+        print("[$index] ")
         println(if (isPassed) "SUCCESS" else "FAILED (output: $result expected: $expected)")
         println()
     }
 
-    println(if (isAllPassed) "TOTAL: SUCCESS" else "TOTAL: FAILED")
+    println(if (failedCount == 0) "TOTAL: SUCCESS" else "TOTAL: FAILED ($failedCount)")
     println()
 }
