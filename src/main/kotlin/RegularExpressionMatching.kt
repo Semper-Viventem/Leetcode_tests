@@ -57,6 +57,12 @@ fun main() {
 }
 
 fun isMatch(s: String, p: String): Boolean {
+    return dp(s, p)
+//    return recursion(s, p)
+//    return stdLib(s, p)
+}
+
+fun dp(s: String, p: String): Boolean {
     val dp = Array(s.length + 1) { BooleanArray(p.length + 1) }
     dp[0][0] = true
     for (i in 1..p.length) {
@@ -76,7 +82,7 @@ fun isMatch(s: String, p: String): Boolean {
     return dp[s.length][p.length]
 }
 
-fun isMatch3(s: String, p: String): Boolean {
+fun recursion(s: String, p: String): Boolean {
     if (p.isEmpty()) return s.isEmpty()
 
     if (p.length >= 2 && p[1] == '*' && s.length > 0 && (s[0] == p[0] || p[0] == '.')) {
@@ -96,134 +102,6 @@ fun isMatch3(s: String, p: String): Boolean {
     }
 }
 
-fun isMatch2(s: String, p: String): Boolean {
+fun stdLib(s: String, p: String): Boolean {
     return p.toRegex().matches(s)
-}
-
-// -------------------------
-fun isMatch1(s: String, p: String): Boolean {
-    if (p.isEmpty()) return s.isEmpty()
-    if (s.isEmpty()) return p == "*"
-
-    var i = 0
-    var maskIndex = 0
-
-    var maskMode: MaskMode = MaskMode.Initializing
-
-    fun nextMask() {
-        val newMask = getMaskMode(p, maskIndex)
-        println(newMask)
-
-        val currentPlural = maskMode as? MaskMode.PluralOptional
-//        val shouldSkip = (newMask is MaskMode.PluralOptional && (!newMask.check(s.getOrNull(i + 1)) && !newMask.check(s.getOrNull(i))))
-//                || currentPlural != null && newMask !is MaskMode.SingleOptional && newMask.check(currentPlural.symbol)
-
-        val nextMask = newMask.takeIf { it is MaskMode.PluralOptional && it.symbol == '.' }?.let {
-            getMaskMode(p, maskIndex + 2)
-        }
-
-        val shouldSkip = nextMask != null && nextMask.check(s.getOrNull(i + 1))
-                || (newMask is MaskMode.PluralOptional && (!newMask.check(s.getOrNull(i + 1)) && !newMask.check(
-            s.getOrNull(
-                i
-            )
-        )))
-                || currentPlural != null && newMask !is MaskMode.SingleOptional && newMask.check(currentPlural.symbol)
-
-        if (newMask is MaskMode.PluralOptional) {
-            maskIndex++
-        }
-
-        if (shouldSkip) {
-            maskIndex++
-            println("SKIP MASK")
-            nextMask()
-        } else {
-            maskMode = newMask
-            maskIndex++
-        }
-    }
-
-    nextMask()
-
-    while (maskMode !is MaskMode.MaskIsFinished) {
-
-        val current = s.getOrNull(i)
-        println("Current: $current")
-
-        when (val mode = maskMode) {
-            is MaskMode.StrictMatch -> {
-                if (mode.symbol != current) return false
-                nextMask()
-            }
-
-            is MaskMode.SingleOptional -> {
-                if (current == null) return false
-                nextMask()
-            }
-
-            is MaskMode.PluralOptional -> {
-                val next = s.getOrNull(i + 1)
-                if (!mode.check(next) || !mode.check(current)) {
-                    nextMask()
-                }
-            }
-
-            is MaskMode.MaskIsFinished -> {
-                return current == null
-            }
-
-            is MaskMode.Initializing -> {
-                throw IllegalStateException("Mode cannot be Initializing at this moment")
-            }
-        }
-        i++
-    }
-
-    return i > s.lastIndex
-}
-
-private fun getMaskMode(pattern: String, index: Int): MaskMode {
-    return when {
-        pattern.lastIndex < index -> MaskMode.MaskIsFinished
-        pattern.getOrNull(index + 1) == '*' -> MaskMode.PluralOptional(pattern.getOrNull(index))
-        pattern[index] == '.' -> MaskMode.SingleOptional
-
-        else -> MaskMode.StrictMatch(pattern[index])
-    }
-}
-
-private sealed interface MaskMode {
-
-    fun check(char: Char?): Boolean
-
-    data object Initializing : MaskMode {
-        override fun check(char: Char?): Boolean {
-            throw IllegalStateException("Initializing state doesn't support check")
-        }
-    }
-
-    data class StrictMatch(val symbol: Char?) : MaskMode {
-        override fun check(char: Char?): Boolean {
-            return char == symbol
-        }
-    }
-
-    data object SingleOptional : MaskMode {
-        override fun check(char: Char?): Boolean {
-            return true
-        }
-    }
-
-    data class PluralOptional(val symbol: Char?) : MaskMode {
-        override fun check(char: Char?): Boolean {
-            return char != null && (symbol == '.' || char == symbol)
-        }
-    }
-
-    data object MaskIsFinished : MaskMode {
-        override fun check(char: Char?): Boolean {
-            return false
-        }
-    }
 }
