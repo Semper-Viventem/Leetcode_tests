@@ -81,9 +81,9 @@ fun numIslands(grid: Array<CharArray>): Int {
         }
     }
 
-    grid.forEachIndexed { rowIndex, row ->
-        row.forEachIndexed { columnIndex, item ->
-            if (item == '1' && !markedIslands.contains(rowIndex to columnIndex)) {
+    for (rowIndex in 0..rowMax) {
+        for (columnIndex in 0..columnMax) {
+            if (grid[rowIndex][columnIndex] == '1' && !markedIslands.contains(rowIndex to columnIndex)) {
                 checkNode(rowIndex, columnIndex, islandEntryPoint = rowIndex to columnIndex)
                 count++
             }
