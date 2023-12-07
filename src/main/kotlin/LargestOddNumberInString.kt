@@ -35,9 +35,9 @@ fun main() = test(
 )
 
 fun largestOddNumber(num: String): String {
-    for (i in num.lastIndex downTo 0) {
-        val char = num[i]
-        if (char.digitToInt() % 2 != 0) {
+    for (i in (num.length - 1) downTo 0) {
+        val char = '0' - num[i]
+        if (char % 2 != 0) {
             return num.substring(0..i)
         }
     }
