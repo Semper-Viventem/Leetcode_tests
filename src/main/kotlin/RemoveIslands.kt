@@ -63,8 +63,8 @@ fun main() = test(
  * Space complexity: O(n)
  */
 fun removeIslands(matrix: List<List<Int>>): List<List<Int>> {
-    val rowMax = matrix[0].lastIndex
-    val columnMax = matrix.lastIndex
+    val rowMax = matrix.lastIndex
+    val columnMax = matrix[0].lastIndex
 
     val isConnected = hashSetOf<Pair<Int, Int>>()
 
