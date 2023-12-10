@@ -66,6 +66,9 @@ private fun arrayToString(array: Array<IntArray>): String {
     return result.toString()
 }
 
+/**
+ * Runtime best 100% solution, LOL
+ */
 fun transpose(matrix: Array<IntArray>): Array<IntArray> {
     return Array(matrix[0].size) { i ->
         IntArray(matrix.size) { j -> matrix[j][i] }
