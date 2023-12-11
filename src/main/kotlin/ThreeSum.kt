@@ -38,7 +38,6 @@ fun main() = test(
         intArrayOf(0, 0, 0, 0) to listOf(listOf(0, 0, 0)).ordered(),
     ),
     testFunctionExecution = { threeSum(it).ordered() },
-    runOnlyCaseNr = 3
 )
 
 private fun List<List<Int>>.ordered(): List<List<Int>> = this.map { it.sorted() }.sortedBy { it.toString() }
