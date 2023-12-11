@@ -14,39 +14,36 @@ fun nSum(
         nums.sort()
     }
 
-    val result = mutableSetOf<List<Int>>()
-
-    if (targetAmount == 2) { // solution for 2Sum
+    return if (targetAmount == 2) { // solution for 2 Sum
         var l = startPosition
-        var r = nums.lastIndex
-        while (l < r) {
-            val left = nums[l].toLong()
-            if (left + nums[r] == targetSum) {
-                result.add(listOf(nums[l], nums[r]))
-            }
+        var r = nums.size - 1
+        val result = mutableListOf<MutableList<Int>>()
 
-            if (left <= targetSum - nums[r]) {
+        while (l < r) {
+            val sum: Long = nums[l].toLong() + nums[r].toLong()
+            if (sum == targetSum) {
+                result.add(mutableListOf(nums[l], nums[r]))
+                val rNumber = nums[r]
+                val lNumber = nums[l]
+                while (r > 0 && rNumber == nums[r]) r--
+                while (l < nums.size && lNumber == nums[l]) l++
+            } else if (sum < targetSum) {
                 l++
             } else {
                 r--
             }
         }
+        result
     } else {
-        for (i in startPosition..(nums.lastIndex - (targetAmount - 1))) {
-            val current = nums[i]
-            val expectedSum = targetSum - current
-            val localResult = nSum(
-                nums = nums,
-                targetSum = expectedSum,
-                targetAmount = targetAmount - 1,
-                startPosition = i + 1,
-                isSorted = true
-            )
-            result.addAll(localResult.map {
-                (listOf(current) + it)
-            })
+        val result = mutableListOf<List<Int>>()
+        for (i in startPosition..nums.size - targetAmount) {
+            if (i == startPosition || nums[i] != nums[i - 1]) {
+                val localResult = nSum(nums, targetSum - nums[i], targetAmount - 1, i + 1)
+                localResult.forEach {
+                    result.add(it + nums[i])
+                }
+            }
         }
+        result
     }
-
-    return result.toList()
 }
