@@ -43,6 +43,10 @@ fun main() = test(
 private fun List<List<Int>>.ordered(): List<List<Int>> = this.map { it.sorted() }.sortedBy { it.toString() }
 
 fun threeSum(nums: IntArray): List<List<Int>> {
+    return nSum(nums, 0L, 3)
+}
+
+fun threeSum1(nums: IntArray): List<List<Int>> {
     nums.sort()
 
     val result = mutableListOf<List<Int>>()
@@ -54,7 +58,7 @@ fun threeSum(nums: IntArray): List<List<Int>> {
         }
     }
 
-    return result.toList()
+    return result
 }
 
 fun twoSum(nums: IntArray, leftIndex: Int, targetSum: Int, current: Int, result: MutableList<List<Int>>) {
