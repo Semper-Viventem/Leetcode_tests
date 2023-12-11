@@ -32,5 +32,5 @@ fun main() = test(
 private fun List<List<Int>>.ordered(): List<List<Int>> = this.map { it.sorted() }.sortedBy { it.toString() }
 
 fun fourSum(nums: IntArray, target: Int): List<List<Int>> {
-    return nSum(nums, 1L* target, 4).ordered()
+    return kSum(nums, 1L* target, 4).ordered()
 }

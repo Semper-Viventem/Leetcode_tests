@@ -1,12 +1,12 @@
 /**
- * A common solution for problems like "Find all unique combinations of N elements which gives some sum"
+ * A common solution for problems like "Find all unique combinations of K elements which give a target sum"
  *
  * @see [ThreeSum.kt]
  */
-fun nSum(
+fun kSum(
     nums: IntArray,
     targetSum: Long,
-    targetAmount: Int,
+    k: Int,
     startPosition: Int = 0,
     isSorted: Boolean = false
 ): List<List<Int>> {
@@ -14,7 +14,7 @@ fun nSum(
         nums.sort()
     }
 
-    return if (targetAmount == 2) { // solution for 2 Sum
+    return if (k == 2) { // solution for 2 Sum
         var l = startPosition
         var r = nums.size - 1
         val result = mutableListOf<MutableList<Int>>()
@@ -36,9 +36,9 @@ fun nSum(
         result
     } else {
         val result = mutableListOf<List<Int>>()
-        for (i in startPosition..nums.size - targetAmount) {
+        for (i in startPosition..nums.size - k) {
             if (i == startPosition || nums[i] != nums[i - 1]) {
-                val localResult = nSum(nums, targetSum - nums[i], targetAmount - 1, i + 1)
+                val localResult = kSum(nums, targetSum - nums[i], k - 1, i + 1)
                 localResult.forEach {
                     result.add(it + nums[i])
                 }

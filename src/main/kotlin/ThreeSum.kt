@@ -43,7 +43,7 @@ fun main() = test(
 private fun List<List<Int>>.ordered(): List<List<Int>> = this.map { it.sorted() }.sortedBy { it.toString() }
 
 fun threeSum(nums: IntArray): List<List<Int>> {
-    return nSum(nums, 0L, 3)
+    return kSum(nums, 0L, 3)
 }
 
 fun threeSum1(nums: IntArray): List<List<Int>> {
