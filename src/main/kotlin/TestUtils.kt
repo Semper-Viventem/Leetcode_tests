@@ -37,3 +37,32 @@ private fun defaultDataTo(data: Any?): String {
         data.toString()
     }
 }
+
+data class ListNode(var `val`: Int, var next: ListNode? = null) {
+    override fun toString(): String {
+        val builder = StringBuilder()
+        var current: ListNode? = this
+        builder.append("[")
+        while (true) {
+            builder.append(current?.`val`)
+            if (current?.next == null) {
+                builder.append("]")
+                break
+            } else {
+                builder.append(", ")
+            }
+            current = current?.next
+        }
+        return builder.toString()
+    }
+}
+
+fun IntArray.toListNode(): ListNode? {
+    if (isEmpty()) return null
+    var lastNode = ListNode(get(lastIndex))
+    for (i in (lastIndex - 1) downTo 0) {
+        val tmp = ListNode(get(i)).apply { next = lastNode }
+        lastNode = tmp
+    }
+    return lastNode
+}
