@@ -50,29 +50,21 @@ fun mergeKLists(lists: Array<ListNode?>): ListNode? {
     if (lists.isEmpty()) return null
     val queue = PriorityQueue<ListNode> { first, second -> first!!.`val` - second.`val` }
     lists.forEach {
-        if (it != null) {
-            queue.add(it)
-        }
+        it?.let(queue::add)
     }
 
-    var head: ListNode? = null
+    val head = ListNode(Int.MIN_VALUE)
     var current = head
 
     while (queue.isNotEmpty()) {
         val selected = queue.poll()
-        if (current == null) {
-            head = selected
-            current = head
-        } else {
-            current.next = selected
-            current = selected
-        }
-        if (selected.next != null) {
-            queue.offer(selected.next)
-        }
+
+        current.next = selected
+        current = selected
+        selected.next?.let(queue::offer)
     }
 
-    return head
+    return head.next
 }
 
 
