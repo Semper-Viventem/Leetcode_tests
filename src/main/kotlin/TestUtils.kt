@@ -66,3 +66,14 @@ fun IntArray.toListNode(): ListNode? {
     }
     return lastNode
 }
+
+fun arrayToString(array: Array<IntArray>): String {
+    val result = StringBuffer()
+    result.append("\n")
+    result.append(
+        array.joinToString(prefix = "[\n", postfix = "\n]\n", separator = ",\n") {
+            it.joinToString(prefix = "  [", postfix = "]", separator = ", ")
+        }
+    )
+    return result.toString()
+}

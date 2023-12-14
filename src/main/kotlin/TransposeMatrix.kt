@@ -55,17 +55,6 @@ fun main() = test(
     assert = { expected, actual -> arrayToString(expected) == arrayToString(actual) }
 )
 
-private fun arrayToString(array: Array<IntArray>): String {
-    val result = StringBuffer()
-    result.append("\n")
-    result.append(
-        array.joinToString(prefix = "[\n", postfix = "\n]\n", separator = ",\n") {
-            it.joinToString(prefix = "  [", postfix = "]", separator = ", ")
-        }
-    )
-    return result.toString()
-}
-
 /**
  * Runtime best 100% solution, LOL
  */
