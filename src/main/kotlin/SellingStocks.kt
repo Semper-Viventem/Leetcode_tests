@@ -21,8 +21,9 @@ fun main() = test(
         (intArrayOf(6, 1, 5, 2, 6, 3, 7) to 3) to 12,
         (intArrayOf(6, 1, 5, 9, 11, 11, 15) to 3) to 14,
     ),
-    testFunctionExecution = { (days, k) -> maxProfit(k, days) },
+    testFunctionExecution = { (days, k) -> maxProfit1(k, days) },
     inputToString = { (it.first.toList() to it.second).toString() },
+    runOnlyCaseNr = 5
 )
 
 fun maxProfit(k: Int, prices: IntArray): Int {
@@ -37,6 +38,10 @@ fun maxProfit(k: Int, prices: IntArray): Int {
     return sell[k - 1]
 }
 
+/**
+ * Time: O(n * k)
+ * Space: O(n * k) ??
+ */
 fun maxProfit1(k: Int, prices: IntArray): Int {
     if (prices.size < k) return 0
     val dp = Array(prices.size) { IntArray(k) { -1 } }
