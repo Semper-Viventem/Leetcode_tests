@@ -1,3 +1,5 @@
+import java.util.*
+
 /**
  * Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
  *
@@ -26,23 +28,31 @@ val parenthesisCache = hashMapOf<Int, List<String>>()
 fun generateParenthesis(n: Int): List<String> {
     if (n == 0) return listOf("")
     if (n == 1) return listOf("()")
+    if (n == 2) return listOf("(())", "()()")
     if (parenthesisCache[n] != null) return parenthesisCache[n]!!
 
     val result = mutableListOf<String>()
 
     permutations(n).map { permutation ->
-        var permutationVariants = mutableListOf<List<String>>(mutableListOf())
-        permutation.forEachIndexed { permutationNr, case ->
-            var variants = generateParenthesis(case - 1)
-            var newPermutationVariants = mutableListOf<List<String>>()
+        var permutationVariants = mutableListOf(StringBuilder())
+        permutation.forEach { case ->
+            val variants = generateParenthesis(case - 1)
+            val newPermutationVariants = LinkedList<StringBuilder>()
             variants.forEach { variant ->
                 permutationVariants.forEach { permutationVariant ->
-                    newPermutationVariants.add(permutationVariant + listOf("($variant)"))
+                    newPermutationVariants.add(
+                        StringBuilder().apply {
+                            append(permutationVariant)
+                            append('(')
+                            append(variant)
+                            append(')')
+                        }
+                    )
                 }
             }
             permutationVariants = newPermutationVariants
         }
-        result += permutationVariants.map { it.joinToString("") }
+        result += permutationVariants.map { it.toString() }
     }
 
     parenthesisCache[n] = result
