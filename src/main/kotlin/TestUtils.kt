@@ -4,7 +4,8 @@ fun <A, B> test(
     runOnlyCaseNr: Int? = null,
     inputToString: (input: A) -> String = ::defaultDataTo,
     outputToString: (input: B) -> String = ::defaultDataTo,
-    assert: (expected: B, actual: B) -> Boolean = { expected, actual -> expected == actual }
+    assert: (expected: B, actual: B) -> Boolean = { expected, actual -> expected == actual },
+    clearEnv: () -> Unit = { },
 ) {
     var failedCount: Int = 0
 
@@ -16,13 +17,17 @@ fun <A, B> test(
 
     selectedTests.forEachIndexed { index, (test, expected) ->
         println(inputToString(test))
+        clearEnv.invoke()
+        val startTime = System.currentTimeMillis()
         val result = testFunctionExecution.invoke(test)
+        val endTime = System.currentTimeMillis()
+        val totalTimeMs = endTime - startTime
         val isPassed = assert(expected, result)
         if (!isPassed) {
             failedCount++
         }
         print("[$index] ")
-        println(if (isPassed) "SUCCESS" else "FAILED (output: ${outputToString(result)} expected: ${outputToString(expected)})")
+        println((if (isPassed) "SUCCESS" else "FAILED (output: ${outputToString(result)} expected: ${outputToString(expected)})") + "; time: $totalTimeMs")
         println()
     }
 
