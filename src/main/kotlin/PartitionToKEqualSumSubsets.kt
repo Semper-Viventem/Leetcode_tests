@@ -41,6 +41,9 @@ fun canPartitionKSubsets(nums: IntArray, k: Int): Boolean {
     return checkSubsets(i = 0, nums = nums, k = k, reservedIndices = 0b0, targetSum = targetSum, subsetSum = 0)
 }
 
+/**
+ * Top 100% time with cache and top 100% memory without cache
+ */
 var checkSubsetDPCache = hashMapOf<Int, Boolean>()
 fun checkSubsets(
     i: Int,
