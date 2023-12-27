@@ -14,6 +14,7 @@
  * Input: nums = [1,2,3,4], k = 3
  * Output: false
  *
+ * https://leetcode.com/problems/partition-to-k-equal-sum-subsets/submissions/?envType=list&envId=pwbxerl1
  */
 fun main() = test(
     testData = listOf(
@@ -49,39 +50,39 @@ fun checkSubsets(
     targetSum: Int,
     subsetSum: Int,
 ): Boolean {
-    if (k == 0) return true
     return checkSubsetDPCache.getOrPut(reservedIndices) {
-        var result = false
-        if (subsetSum == targetSum) {
-            result = checkSubsets(
-                0,
-                k = k - 1,
-                subsetSum = 0,
-                targetSum = targetSum,
-                reservedIndices = reservedIndices,
-                nums = nums
-            )
-        } else {
-            for (j in i until nums.size) {
+        k == 0 || run {
+            var result = false
+            for (j in i..nums.lastIndex) {
                 val jMask = 0b1 shl j
-                if (reservedIndices or jMask != reservedIndices && subsetSum + nums[j] <= targetSum) {
-                    val leftGroupsAreCorrect = checkSubsets(
-                        i = j + 1,
-                        k = k,
-                        subsetSum = subsetSum + nums[j],
-                        reservedIndices = reservedIndices or jMask,
-                        nums = nums,
-                        targetSum = targetSum,
-                    )
-
-                    if (leftGroupsAreCorrect) {
+                if (reservedIndices or jMask != reservedIndices) {
+                    val newSubsetSum = subsetSum + nums[j]
+                    if (newSubsetSum == targetSum && checkSubsets(
+                            0,
+                            k = k - 1,
+                            subsetSum = 0,
+                            targetSum = targetSum,
+                            reservedIndices = reservedIndices or jMask,
+                            nums = nums
+                        )
+                    ) {
+                        result = true
+                        break
+                    } else if (newSubsetSum < targetSum && checkSubsets(
+                            i = j + 1,
+                            k = k,
+                            subsetSum = newSubsetSum,
+                            reservedIndices = reservedIndices or jMask,
+                            nums = nums,
+                            targetSum = targetSum,
+                        )
+                    ) {
                         result = true
                         break
                     }
                 }
-
             }
+            result
         }
-        result
     }
 }
