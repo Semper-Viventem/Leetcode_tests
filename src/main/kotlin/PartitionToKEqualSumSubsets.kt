@@ -30,126 +30,58 @@ fun main() = test(
     inputToString = { (nums, k) -> (nums.toList() to k).toString() },
     clearEnv = {
         checkSubsetDPCache.clear()
-        groupIndicesDPCache.clear()
     },
 )
 
-fun canPartitionKSubsets1(nums: IntArray, k: Int): Boolean {
+fun canPartitionKSubsets(nums: IntArray, k: Int): Boolean {
     if (k > nums.size) return false
-    if (nums.sum() % k != 0)
-        return false
-    return checkSubsets(nums, k, 0b0)
+    if (nums.sum() % k != 0) return false
+    val targetSum = nums.sum() / k
+    return checkSubsets(i = 0, nums = nums, k = k, reservedIndices = 0b0, targetSum = targetSum, subsetSum = 0)
 }
 
 var checkSubsetDPCache = hashMapOf<Int, Boolean>()
-
 fun checkSubsets(
+    i: Int,
     nums: IntArray,
     k: Int,
     reservedIndices: Int,
-    numberOfReservedIndexes: Int = 0,
-    prevSum: Int? = null
+    targetSum: Int,
+    subsetSum: Int,
 ): Boolean {
-    val key = reservedIndices * 100 + k
+    if (k == 0) return true
+    return checkSubsetDPCache.getOrPut(reservedIndices) {
+        var result = false
+        if (subsetSum == targetSum) {
+            result = checkSubsets(
+                0,
+                k = k - 1,
+                subsetSum = 0,
+                targetSum = targetSum,
+                reservedIndices = reservedIndices,
+                nums = nums
+            )
+        } else {
+            for (j in i until nums.size) {
+                val jMask = 0b1 shl j
+                if (reservedIndices or jMask != reservedIndices && subsetSum + nums[j] <= targetSum) {
+                    val leftGroupsAreCorrect = checkSubsets(
+                        i = j + 1,
+                        k = k,
+                        subsetSum = subsetSum + nums[j],
+                        reservedIndices = reservedIndices or jMask,
+                        nums = nums,
+                        targetSum = targetSum,
+                    )
 
-    if (nums.size - numberOfReservedIndexes < k) {
-        return false
-    }
+                    if (leftGroupsAreCorrect) {
+                        result = true
+                        break
+                    }
+                }
 
-    if (checkSubsetDPCache[key] != null) {
-        return checkSubsetDPCache[key]!!
-    }
-
-    var groupSize: Int = nums.size - numberOfReservedIndexes
-    while (groupSize >= 1) {
-        getGroupVariants(nums, groupSize, reservedIndices).forEach { groupIndeces ->
-            val groupSum = sumByMask(nums, groupIndeces)
-            val targetSum = prevSum ?: groupSum
-            fun isSumCorrect() = groupSum == targetSum
-            fun isLastGroup() = groupSize + numberOfReservedIndexes == nums.size && k == 1
-            fun leftoverIsGood() = k == 2 && sumByInvertedMask(nums, reservedIndices or groupIndeces) == targetSum
-            fun otherGroupsAreFine() = (k > 1 && checkSubsets(nums, k - 1, reservedIndices or groupIndeces, numberOfReservedIndexes + groupSize, targetSum))
-            if (isSumCorrect() && (isLastGroup() || leftoverIsGood() || otherGroupsAreFine())) {
-                checkSubsetDPCache[key] = true
-                return true
             }
         }
-        groupSize--
+        result
     }
-    checkSubsetDPCache[key] = false
-    return false
-}
-
-var groupIndicesDPCache = hashMapOf<Int, Set<Int>>()
-fun getGroupVariants(nums: IntArray, groupSize: Int, reservedIndices: Int): Set<Int> {
-    if (groupSize == 0) return setOf(0b0)
-    val key = groupSize * 10000 + reservedIndices
-
-    if (groupIndicesDPCache[key] != null) {
-        return groupIndicesDPCache[key]!!
-    }
-
-    val result = mutableSetOf<Int>()
-
-    for (i in nums.indices) {
-        val indexMask = intToBitMask(i)
-        if (reservedIndices or indexMask != reservedIndices) {
-            result += getGroupVariants(nums, groupSize - 1, reservedIndices or indexMask).map { indexMask or it }
-        }
-    }
-
-    groupIndicesDPCache[key] = result
-    return result
-}
-
-fun sumByMask(nums: IntArray, indexesMask: Int): Int {
-    var sum = 0
-
-    for (i in nums.indices) {
-        val indexMask = intToBitMask(i)
-        if (indexMask or indexesMask == indexesMask) sum += nums[i]
-    }
-
-    return sum
-}
-
-fun sumByInvertedMask(nums: IntArray, indexesMask: Int): Int {
-    var sum = 0
-
-    for (i in nums.indices) {
-        val indexMask = intToBitMask(i)
-        if (indexMask or indexesMask != indexesMask) sum += nums[i]
-    }
-
-    return sum
-}
-
-fun intToBitMask(int: Int): Int {
-    return 0b1 shl int
-}
-
-fun canPartitionKSubsets(nums: IntArray, k: Int): Boolean {
-    val targetSum = nums.sum() / k
-    if (nums.sum() % k != 0) return false
-    return backtrack(0, k, 0, targetSum, 0b0, nums)
-}
-
-fun backtrack(i: Int, k: Int, subsetSum: Int, targetSum: Int, used: Int, nums: IntArray): Boolean {
-
-    if (k == 0) return true
-
-    if (subsetSum == targetSum) return backtrack(0, k - 1, 0, targetSum, used, nums)
-
-    for (j in i until nums.size) {
-        val jMask = intToBitMask(j)
-        if (used or jMask == used || subsetSum + nums[j] > targetSum) {
-            continue
-        }
-
-        if (backtrack(j + 1, k, subsetSum + nums[j], targetSum, used or jMask, nums))
-            return true
-    }
-
-    return false
-
 }
