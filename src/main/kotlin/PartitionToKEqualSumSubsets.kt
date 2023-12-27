@@ -41,9 +41,6 @@ fun canPartitionKSubsets(nums: IntArray, k: Int): Boolean {
     return checkSubsets(i = 0, nums = nums, k = k, reservedIndices = 0b0, targetSum = targetSum, subsetSum = 0)
 }
 
-/**
- * Top 100% time with cache and top 100% memory without cache
- */
 var checkSubsetDPCache = hashMapOf<Int, Boolean>()
 fun checkSubsets(
     i: Int,
@@ -54,38 +51,39 @@ fun checkSubsets(
     subsetSum: Int,
 ): Boolean {
     return checkSubsetDPCache.getOrPut(reservedIndices) {
-        k == 0 || run {
-            var result = false
-            for (j in i..nums.lastIndex) {
-                val jMask = 0b1 shl j
-                if (reservedIndices or jMask != reservedIndices) {
-                    val newSubsetSum = subsetSum + nums[j]
-                    if (newSubsetSum == targetSum && checkSubsets(
-                            0,
-                            k = k - 1,
-                            subsetSum = 0,
-                            targetSum = targetSum,
-                            reservedIndices = reservedIndices or jMask,
-                            nums = nums
-                        )
-                    ) {
-                        result = true
-                        break
-                    } else if (newSubsetSum < targetSum && checkSubsets(
-                            i = j + 1,
-                            k = k,
-                            subsetSum = newSubsetSum,
-                            reservedIndices = reservedIndices or jMask,
-                            nums = nums,
-                            targetSum = targetSum,
-                        )
-                    ) {
-                        result = true
-                        break
-                    }
+        var result = false
+        for (j in i..nums.lastIndex) {
+            val jMask = 0b1 shl j
+            if (reservedIndices or jMask != reservedIndices) {
+                val newSubsetSum = subsetSum + nums[j]
+                if (newSubsetSum == targetSum && k == 1) {
+                    result = true
+                    break
+                } else if (newSubsetSum == targetSum && checkSubsets(
+                        0,
+                        k = k - 1,
+                        subsetSum = 0,
+                        targetSum = targetSum,
+                        reservedIndices = reservedIndices or jMask,
+                        nums = nums
+                    )
+                ) {
+                    result = true
+                    break
+                } else if (newSubsetSum < targetSum && checkSubsets(
+                        i = j + 1,
+                        k = k,
+                        subsetSum = newSubsetSum,
+                        reservedIndices = reservedIndices or jMask,
+                        nums = nums,
+                        targetSum = targetSum,
+                    )
+                ) {
+                    result = true
+                    break
                 }
             }
-            result
         }
+        result
     }
 }
