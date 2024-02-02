@@ -53,6 +53,30 @@ fun main() {
             map.put("2", null)
             map.get("2")
         },
+        testCase(15, testName = "Check size adding elements") { map ->
+            repeat(15) {
+                map.put(it, it)
+            }
+            map.size
+        },
+        testCase(15, testName = "Check size removing elements") { map ->
+            repeat(15) {
+                map.put(it, it)
+            }
+            map.put(32, 1)
+            map.put(32, null)
+            map.size
+        },
+        testCase(0, testName = "Check size is zero if no elements have been removed") { map ->
+            map.put(1, null)
+            map.size
+        },
+        testCase(1, testName = "Check size is not changing if an existing element has been changed") { map ->
+            map.put(1, 1)
+            map.put(1, 2)
+            map.put(1, 3)
+            map.size
+        },
     )
 }
 

@@ -26,14 +26,16 @@ class SimpleHashMap<K, V> {
                 size--
             }
         } else {
-            putInternal(key, value)
-            size++
+            val wasAdded = putInternal(key, value)
+            if (wasAdded) {
+                size++
+            }
         }
     }
 
-    private fun putInternal(key: K, value: V) {
+    private fun putInternal(key: K, value: V): Boolean {
         val bucket = store[findBucketIndex(key)]
-        bucket.addOrReplace(key, value)
+        return bucket.addOrReplace(key, value)
     }
 
     private fun removeInternal(key: K): Boolean {
@@ -64,13 +66,16 @@ class SimpleHashMap<K, V> {
             return nodes.firstOrNull { it.key == key }?.value
         }
 
-        fun addOrReplace(key: K, value: V) {
+        fun addOrReplace(key: K, value: V): Boolean {
             val node = nodes.firstOrNull { it.key == key }
+            var wasAdded = false
             if (node != null) {
                 node.value = value
             } else {
                 nodes.add(Node(key, value))
+                wasAdded = true
             }
+            return wasAdded
         }
 
         fun remove(key: K): Boolean {
