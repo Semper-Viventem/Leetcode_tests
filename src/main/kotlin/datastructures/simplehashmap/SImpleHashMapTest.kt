@@ -41,6 +41,18 @@ fun main() {
 
             listOf(map.get(0), map.get(1), map.get(2))
         },
+        testCase(1, testName = "Check not integer key") { map ->
+            map.put("2", 1)
+            map.get("2")
+        },
+        testCase(null, testName = "Check not integer key returns null if no elements") { map ->
+            map.get("2")
+        },
+        testCase(null, testName = "Check not integer key returns null if element has been removed") { map ->
+            map.put("2", 1)
+            map.put("2", null)
+            map.get("2")
+        },
     )
 }
 
