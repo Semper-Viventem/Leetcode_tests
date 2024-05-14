@@ -16,14 +16,12 @@ fun main() = test(
     testFunctionExecution = ::getMaximumGold,
 )
 
-data class Cell(val row: Int, val column: Int)
-
 fun getMaximumGold(grid: Array<IntArray>): Int {
     var result = 0
 
     for (row in grid.indices) {
         for (column in grid.first().indices) {
-            val cellMax = findMaxPathsFromCell(grid, setOf(), Cell(row, column))
+            val cellMax = findMaxPathsFromCell(grid, row, column)
             result = max(result, cellMax)
         }
     }
@@ -31,36 +29,38 @@ fun getMaximumGold(grid: Array<IntArray>): Int {
     return result
 }
 
-fun findMaxPathsFromCell(grid: Array<IntArray>, backtracking: Set<Cell>, cell: Cell): Int {
-    if (grid[cell.row][cell.column] == 0 || backtracking.contains(cell)) return 0
+fun findMaxPathsFromCell(grid: Array<IntArray>, row: Int, column: Int): Int {
+    if (grid[row][column] == 0) return 0
 
     var best = 0
 
-    val nextBackTracking = backtracking + setOf(Cell(cell.row, cell.column))
+    val originalValue = grid[row][column]
 
+    grid[row][column] = 0
     // top
-    if (cell.row > 0) {
-        val top = findMaxPathsFromCell(grid, nextBackTracking, Cell(cell.row - 1, cell.column))
+    if (row > 0) {
+        val top = findMaxPathsFromCell(grid, row - 1, column)
         best = max(best, top)
     }
 
     // bottom
-    if (cell.row < grid.lastIndex) {
-        val bottom = findMaxPathsFromCell(grid, nextBackTracking, Cell(cell.row + 1, cell.column))
+    if (row < grid.lastIndex) {
+        val bottom = findMaxPathsFromCell(grid, row + 1, column)
         best = max(best, bottom)
     }
 
     // left
-    if (cell.column > 0) {
-        val left = findMaxPathsFromCell(grid, nextBackTracking, Cell(cell.row, cell.column - 1))
+    if (column > 0) {
+        val left = findMaxPathsFromCell(grid, row, column - 1)
         best = max(best, left)
     }
 
     // right
-    if (cell.column < grid.first().lastIndex) {
-        val right = findMaxPathsFromCell(grid, nextBackTracking, Cell(cell.row, cell.column + 1))
+    if (column < grid.first().lastIndex) {
+        val right = findMaxPathsFromCell(grid, row, column + 1)
         best = max(best, right)
     }
 
-    return grid[cell.row][cell.column] + best
+    grid[row][column] = originalValue
+    return originalValue + best
 }
