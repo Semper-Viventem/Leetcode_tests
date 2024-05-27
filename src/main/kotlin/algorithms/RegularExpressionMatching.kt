@@ -58,7 +58,7 @@ fun main() {
     )
 }
 
-fun isMatch(s: String, p: String): Boolean {
+private fun isMatch(s: String, p: String): Boolean {
     return dp(s, p)
 //    return recursion(s, p)
 //    return stdLib(s, p)
