@@ -6,12 +6,14 @@ fun main() = test(
     testData = listOf(
         "384" to 384f,
         "2+2" to 4f,
+        "2 + -1" to 1f,
         "21+12" to 33f,
         " 2 + 2- 1" to 3f,
         " 1-1 +2" to 2f,
         "2+2 * 2" to 6f,
         "2 * 2 + 2" to 6f,
         "2 * 2 + 2 / 2" to 5f,
+        "2 * -2 + 2 / 2" to -3f,
     ),
     testFunctionExecution = ::mathExpression,
 )
