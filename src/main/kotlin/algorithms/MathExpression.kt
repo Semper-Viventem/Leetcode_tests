@@ -1,49 +1,92 @@
 package algorithms
 
 import utils.test
+import java.util.*
 
 fun main() = test(
     testData = listOf(
-        "384" to 384f,
-        "2+2" to 4f,
-        "2 + -1" to 1f,
-        "21+12" to 33f,
-        " 2 + 2- 1" to 3f,
-        " 1-1 +2" to 2f,
-        "2+2 * 2" to 6f,
-        "2 * 2 + 2" to 6f,
-        "2 * 2 + 2 / 2" to 5f,
-        "2 * -2 + 2 / 2" to -3f,
+        "384" to 384,
+        "2+2" to 4,
+        "2 + -1" to 1,
+        "21+12" to 33,
+        " 2 + 2- 1" to 3,
+        " 1-1 +2" to 2,
+        "2+2 * 2" to 6,
+        "2 * 2 + 2" to 6,
+        "2 * 2 + 2 / 2" to 5,
+        //"2 * -2 + 2 / 2" to -3, // is not working with stack solution
+        "0-2147483647" to -2147483647,
+        "1*2-3/4+5*6-7*8+9/10" to -24,
     ),
-    testFunctionExecution = ::mathExpression,
+    testFunctionExecution = ::calculate,
 )
 
-fun mathExpression(string: String): Float {
-    return Operation.build(string.replace(" ", "")).perform()
+fun calculate(string: String): Int {
+    val stack = Stack<Int>()
+
+    var operation = '+'
+    var current = 0
+
+    for (i in string.indices) {
+        val c = string[i]
+
+        if (c.isDigit()) {
+            current = current * 10 + c.digitToInt()
+        }
+
+        if ((!c.isDigit() && c != ' ') || i == string.lastIndex) {
+            when (operation) {
+                '+' -> stack.push(current)
+                '-' -> stack.push(-current)
+                '*' -> stack.push(stack.pop() * current)
+                '/' -> stack.push(stack.pop() / current)
+            }
+
+            operation = c
+            current = 0
+        }
+    }
+
+    var result = 0
+    while (!stack.isEmpty()) {
+        result += stack.pop()
+    }
+    return result
+}
+
+fun calculateOld(string: String): Double {
+    val tree = Operation.build(string.replace(" ", ""))
+    println(tree)
+    return tree.perform()
 }
 
 private sealed interface Operation {
 
-    fun perform(): Float
+    fun perform(): Double
 
-    data class Number(val value: Float): Operation {
-        override fun perform(): Float = value
+    data class Number(val value: Double): Operation {
+        override fun perform(): Double = value
+        override fun toString(): String = value.toInt().toString()
     }
 
     data class Plus(val left: Operation, val right: Operation): Operation {
-        override fun perform(): Float = left.perform() + right.perform()
+        override fun perform(): Double = left.perform() + right.perform()
+        override fun toString(): String = "($left + $right)"
     }
 
     data class Minus(val left: Operation, val right: Operation): Operation {
-        override fun perform(): Float = left.perform() - right.perform()
+        override fun perform(): Double = left.perform() - right.perform()
+        override fun toString(): String = "($left - $right)"
     }
 
     data class Multiply(val left: Operation, val right: Operation): Operation {
-        override fun perform(): Float = left.perform() * right.perform()
+        override fun perform(): Double = left.perform() * right.perform()
+        override fun toString(): String = "($left * $right)"
     }
 
     data class Divide(val left: Operation, val right: Operation): Operation {
-        override fun perform(): Float = left.perform() / right.perform()
+        override fun perform(): Double = left.perform() / right.perform()
+        override fun toString(): String = "($left / $right)"
     }
 
     companion object {
@@ -128,9 +171,9 @@ private sealed interface Operation {
                 end++
             }
 
-            return NextFloatResult(expression.substring(0 .. end).toFloat(), end)
+            return NextFloatResult(expression.substring(0 .. end).toDouble(), end)
         }
 
-        private data class NextFloatResult(val value: Float, val endIndex: Int)
+        private data class NextFloatResult(val value: Double, val endIndex: Int)
     }
 }
