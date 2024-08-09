@@ -58,7 +58,7 @@ data class ListNode(var `val`: Int, var next: ListNode? = null) {
             } else {
                 builder.append(", ")
             }
-            current = current?.next
+            current = current.next
         }
         return builder.toString()
     }
@@ -72,6 +72,10 @@ fun IntArray.toListNode(): ListNode? {
         lastNode = tmp
     }
     return lastNode
+}
+
+fun Array<IntArray>.toFormattedString(): String {
+    return arrayToString(this)
 }
 
 fun arrayToString(array: Array<IntArray>): String {
